@@ -319,8 +319,8 @@
     <header>
         <div class="container header-content">
             <div class="logo-container">
-                <!-- ضع مسار الصورة هنا، تأكد أن اسمها logo.png -->
-                <img src="logo.png" alt="أم درمان نيوز" onerror="this.src='https://via.placeholder.com/300x100/C8102E/FFFFFF?text=أم+درمان+نيوز'">
+                <!-- تم تعديل اسم الصورة ليتطابق مع المرفوع على GitHub -->
+                <img src="logo.png.jpeg" alt="أم درمان نيوز" onerror="this.src='https://via.placeholder.com/300x100/C8102E/FFFFFF?text=أم+درمان+نيوز'">
             </div>
             <nav>
                 <ul>
@@ -382,14 +382,29 @@
         </div>
     </div>
 
+    <!-- التذييل مع روابط التواصل الاجتماعي -->
     <footer>
         <div class="container">
+            
+            <!-- أيقونات فيسبوك ويوتيوب -->
+            <div class="social-links" style="margin-bottom: 20px; display: flex; justify-content: center; gap: 15px;">
+                <!-- رابط صفحة الفيسبوك: استبدل الرابط أدناه برابط صفحتك -->
+                <a href="https://www.facebook.com/YOUR_PAGE_NAME" target="_blank" title="فيسبوك" style="color: white; background: #1877F2; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                
+                <!-- رابط قناة اليوتيوب: استبدل الرابط أدناه برابط قناتك -->
+                <a href="https://www.youtube.com/@YOUR_CHANNEL_NAME" target="_blank" title="يوتيوب" style="color: white; background: #FF0000; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+
             <p>&copy; 2024 أم درمان نيوز. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
     <script>
-        // 1. بيانات الأخبار (يمكنك تعديلها وإضافة المزيد لاحقاً)
+        // 1. بيانات الأخبار
         const newsData = [
             {
                 id: 1,
@@ -414,11 +429,11 @@
             }
         ];
 
-        // 2. بيانات فيديوهات اليوتيوب (استبدل الـ ID برقم الفيديو)
+        // 2. بيانات فيديوهات اليوتيوب
         const videosData = [
-            "dQw4w9WgXcQ", // ضع ID الفيديو الأول هنا
-            "9bZkp7q19f0", // ضع ID الفيديو الثاني هنا
-            "jNQXAC9IVRw"  // ضع ID الفيديو الثالث هنا
+            "dQw4w9WgXcQ",
+            "9bZkp7q19f0",
+            "jNQXAC9IVRw"
         ];
 
         // 3. دالة عرض الأخبار
@@ -459,9 +474,9 @@
             document.getElementById('modalDate').innerHTML = `<i class="far fa-clock"></i> ${article.date}`;
             document.getElementById('modalText').textContent = article.text;
             
-            loadComments(id); // تحميل التعليقات الخاصة بهذا الخبر
+            loadComments(id);
             document.getElementById('articleModal').style.display = 'block';
-            document.body.style.overflow = 'hidden'; // منع التمرير بالخلفية
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
@@ -470,7 +485,7 @@
             currentArticleId = null;
         }
 
-        // 6. نظام التعليقات (يعمل بـ LocalStorage)
+        // 6. نظام التعليقات (LocalStorage)
         function addComment(e) {
             e.preventDefault();
             if(!currentArticleId) return;
@@ -481,14 +496,12 @@
 
             const newComment = { name, text, date };
 
-            // جلب التعليقات السابقة
             let allComments = JSON.parse(localStorage.getItem('omdurman_comments')) || {};
             if(!allComments[currentArticleId]) allComments[currentArticleId] = [];
             
-            allComments[currentArticleId].unshift(newComment); // إضافة التعليق في البداية
+            allComments[currentArticleId].unshift(newComment);
             localStorage.setItem('omdurman_comments', JSON.stringify(allComments));
 
-            // تفريغ الحقول وإعادة تحميل التعليقات
             document.getElementById('commentForm').reset();
             loadComments(currentArticleId);
         }
@@ -514,13 +527,11 @@
             `).join('');
         }
 
-        // إغلاق المودال عند النقر خارجه
         window.onclick = function(event) {
             const modal = document.getElementById('articleModal');
             if (event.target == modal) closeModal();
         }
 
-        // التشغيل الأولي
         renderNews();
         renderVideos();
     </script>
